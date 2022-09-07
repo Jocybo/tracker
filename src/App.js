@@ -1,12 +1,12 @@
 import "./App.css";
 import React from "react";
-import Table from "./Table";
+import ModalForm from "./ModalForm";
 
 function App() {
   return (
     <div>
       <h1>Expence Tracker</h1>
-      <Table />
+      <ModalForm />
     </div>
   );
 }

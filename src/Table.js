@@ -1,113 +1,41 @@
-import { Modal, Input, Button, Form, InputNumber} from "antd";
-import React, { useState } from "react";
-import "antd/dist/antd.css";
+import React from "react";
 
-
-
-const Table = () => {
-
-  const [form] = Form.useForm();
-
-  const [userData,setuserData] = useState([]);
- 
-
-  const onFinish = (values) => {
-    setuserData([...userData,values]);
-    setIsModalVisible(false);
-    form.resetFields();
-  };
-
-  const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } };
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  return (  
-    <div>
-
-      <div className="btn_center">
-        <Button type="primary" onClick={showModal} className="expensebtn">
-          Add Expense 
-        </Button>
-      </div>
-
-        <div>
-          <Modal title="Add Expense" open={isModalVisible} footer={null} onCancel={handleCancel}>
-            
-            <Form {...layout} name="nest-messages" onFinish={onFinish} form={form} >
-
-                <Form.Item name={["category"]} label="Category"  rules={[{required:true,message:"Enter a Category",min:3}]} hasFeedback> 
-                  <Input id="userInput1" />
-                </Form.Item>
-
-                <Form.Item name={["expensename"]} label="Expense Name" rules={[{ required:true,message:"Enter a Expensename",min:3 }]} hasFeedback>
-                  <Input />
-                </Form.Item>
-
-                <Form.Item name={["amount"]} label="Amount Spend" rules={[{ required: true, message:"Enter Amount" }]}>
-                  <InputNumber/>   
-                </Form.Item>
-
-                <Form.Item name={["dateoftransaction"]} label="Date of Transaction" rules={[{ required: true, message:"Pick the Date" }]} hasFeedback>
-                  <input type={"date"}/>
-                </Form.Item>
-
-                <Form.Item name={["description"]} label="Description"  rules={[{required: true, message:"Enter a Description",min:5 }]} hasFeedback>
-                  <Input.TextArea />
-                </Form.Item>
-
-                <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                  <Button type="primary" htmlType="submit" >
-                    Submit
-                  </Button>
-                </Form.Item>
-            </Form>
-  
-          </Modal>
-        </div>
-
-          <table>
-              <thead>
-                <tr>
-                   <th>Category</th>
-                   <th>Expense Name</th>
-                   <th>Amount</th>
-                   <th>Date of Transaction</th>
-                   <th>Description</th>
-                   <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
+const Table = ({tracker}) => {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Expense Name</th>
+          <th>Amount</th>
+          <th>Date of Transaction</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tracker.map((item, id) => {
+          return (
+            <tr key={id}>
+              <td>{item.category}</td>
+              <td>{item.expensename}</td>
+              <td>{item.amount}</td>
+              <td>{item.dateoftransaction}</td>
+              <td>{item.description}</td>
+              <td>
                 {
-                  userData.map((item,id)=>{
-                    return (
-                      <tr key={id}>
-                        <td>{item.category}</td>
-                        <td>{item.expensename}</td>
-                        <td>{item.amount}</td>
-                        <td>{item.dateoftransaction}</td>
-                        <td>{item.description}</td>
-                        <td>{
-                            <>
-                              <button className="edit">Edit</button>
-                              <button className="del" >Del</button>
-                            </>
-                            }</td>
-                      </tr>
-                    )
-                  })
+                  <>
+                    <button className="edit">Edit</button>
+                    <button className="del">Del</button>
+                  </>
                 }
-              </tbody>
-          </table>
-    </div> 
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 
 export default Table;
-
