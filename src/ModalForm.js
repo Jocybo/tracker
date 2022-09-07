@@ -71,7 +71,7 @@ const ModalForm = () => {
           </Modal>
         </div>
         <div>
-          <Table tracker={userData} />
+          <Table tracker={userData} open={showModal} />
         </div>
     </div> 
 
