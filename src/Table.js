@@ -1,21 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Table = ({tracker,open}) => {
-  const [Edit,setEdit] = useState();
-  const [del,setDel] = useState(tracker);
+const Table = ({tracker,open,handleDelete}) => {
 
   const handleEdit = () =>{
-    open();
-    
+    open(); 
   }
-  const handleDel = (e) =>{
-    let id = e.target.getAttribute(removeData);
-    setDel(del.filter(items=>items.id!==id))
-  }
-
-
   return (
-    <table>
+    <table>   
       <thead> 
         <tr>
           <th>Category</th>
@@ -34,15 +25,15 @@ const Table = ({tracker,open}) => {
               <td>{item.expensename}</td>
               <td>{item.amount}</td>
               <td>{item.dateoftransaction}</td>
-              <td>{item.description}</td>
+              <td>{item.description}</td> 
               <td>
                 { 
                   <>
                     <button className="edit" onClick={handleEdit}>Edit</button>
-                    <button className="del" onClick={handleDel} removeData={item.id}>Del</button>
+                    <button className="del" onClick={handleDelete}>Del</button>
                   </>
                 }
-              </td>
+              </td>   
             </tr>
           );
         })}

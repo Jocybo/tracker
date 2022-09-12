@@ -12,7 +12,7 @@ const ModalForm = () => {
   const onFinish = (values) => {
     setuserData([...userData,values]);
     setIsModalVisible(false);
-    form.resetFields();
+    form.resetFields(); 
   };
 
   const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } };
