@@ -31,14 +31,14 @@ tr,th,td{
 }
 th{
   background-color: rgba(143, 142, 142, 0.541);
-  font-size: 18px;
+  font-size: 16px;
 }
 th:hover{
   background-color: rgba(0, 0, 0, 0.527);
   color: white;
 }
 td{
-  font-size: 17px;
+  font-size: 16px;
 }
 button {
   padding: 5px; 
@@ -62,4 +62,11 @@ button {
 }
 .edit:hover {
   background-color:rgb(9, 136, 255) ;
+}
+.editbox{
+  width: 80%;
+  border-radius: 5px;
+  border: 0.5px solid grey;
+  padding-left: 5px;
+  outline: none;
 }

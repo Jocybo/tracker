@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import Edit from "./Edit";
+import Read from "./Read";
 
-const Table = ({tracker,open,handleDelete}) => {
+const Table = ({ tracker, handleDelete }) => {
+  
+  const [edit, setEdit] = useState(null);
 
-  const handleEdit = () =>{
-    open(); 
+  const handleEdit = (item) => {
+    setEdit(item);
+    console.log("from Edit", item);
+  };
+  const handleCancel = () =>{
+    setEdit(null);
   }
+
   return (
-    <table>   
-      <thead> 
+    <table>
+      <thead>
         <tr>
           <th>Category</th>
           <th>Expense Name</th>
@@ -20,21 +29,18 @@ const Table = ({tracker,open,handleDelete}) => {
       <tbody>
         {tracker.map((item, id) => {
           return (
-            <tr key={id}>
-              <td>{item.category}</td>
-              <td>{item.expensename}</td>
-              <td>{item.amount}</td>
-              <td>{item.dateoftransaction}</td>
-              <td>{item.description}</td> 
-              <td>
-                { 
-                  <>
-                    <button className="edit" onClick={handleEdit}>Edit</button>
-                    <button className="del" onClick={handleDelete}>Del</button>
-                  </>
-                }
-              </td>   
-            </tr>
+            <>
+              {edit === id ? (
+                <Edit handleCancel={handleCancel}/>
+              ) : (
+                <Read
+                  uniqueId={id}
+                  item={item}
+                  handleDelete={handleDelete}
+                  handleEdit={handleEdit}
+                />
+              )}
+            </>
           );
         })}
       </tbody>
