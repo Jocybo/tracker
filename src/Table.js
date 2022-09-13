@@ -10,6 +10,7 @@ const Table = ({ tracker, handleDelete }) => {
     setEdit(item);
     console.log("from Edit", item);
   };
+  
   const handleCancel = () =>{
     setEdit(null);
   }

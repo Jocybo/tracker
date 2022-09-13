@@ -6,13 +6,10 @@ import Table from "./Table";
 const ModalForm = () => {
 
   const [form] = Form.useForm();
-
   const [userData,setuserData] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const handleDelete = (index) => {
-    let removeData = (userData.filter((v,i) => i !== index));
-    setuserData(removeData);
-  }
+  const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } };
 
   const onFinish = (values) => {
     setuserData([...userData,values]);
@@ -20,18 +17,19 @@ const ModalForm = () => {
     form.resetFields(); 
   };
 
-  const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } };
-
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
   const showModal = () => {
     setIsModalVisible(true);
   }
-
+  
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
+  
+  const handleDelete = (index) => {
+    let removeData = (userData.filter((v,i) => i !== index));
+    setuserData(removeData);
+  }
+  
   return (  
 
     <div>
