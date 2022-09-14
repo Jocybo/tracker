@@ -2,18 +2,64 @@ import React, { useState } from "react";
 import Edit from "./Edit";
 import Read from "./Read";
 
-const Table = ({ tracker, handleDelete }) => {
-  
-  const [edit, setEdit] = useState(null);
+const Table = ({ tracker, handleDelete, setuserData }) => {
 
-  const handleEdit = (item) => {
-    setEdit(item);
-    console.log("from Edit", item);
-  };
-  
-  const handleCancel = () =>{
+  const [edit, setEdit] = useState(null);
+  const [editForm, seteditForm] = useState({
+    category: "",
+    expensename: "",
+    amount: "",
+    dateoftransaction: "",
+    description: "",
+  });
+
+  const handleCancel = () => {
     setEdit(null);
-  }
+  };
+
+  const handleChange = (event) => {
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newData = { ...editForm };
+    newData[fieldName] = fieldValue;
+
+    seteditForm(newData);
+  };
+
+  const handleEdit = (item, datas) => {
+
+    setEdit(item);
+
+    const newValues = {
+      category: datas.category,
+      expensename: datas.expensename,
+      amount: datas.amount,
+      dateoftransaction: datas.dateoftransaction,
+      description: datas.description,
+    };
+
+    seteditForm(newValues);
+  };
+
+  const handleEditSubmit = (id) => {
+
+    const editedValues = {
+      category: editForm.category,
+      expensename: editForm.expensename,
+      amount: editForm.amount,
+      dateoftransaction: editForm.dateoftransaction,
+      description: editForm.description,
+    };
+
+    const editedData = [...tracker];
+    const index = tracker.findIndex((c, index) => index === id);
+    editedData[index] = editedValues;
+
+    setuserData(editedData);
+    alert("Updated");
+    setEdit(null);
+  };
 
   return (
     <table>
@@ -32,7 +78,13 @@ const Table = ({ tracker, handleDelete }) => {
           return (
             <>
               {edit === id ? (
-                <Edit handleCancel={handleCancel}/>
+                <Edit
+                  handleCancel={handleCancel}
+                  editForm={editForm}
+                  handleChange={handleChange}
+                  handleEditSubmit={handleEditSubmit}
+                  uniqueId={id}
+                />
               ) : (
                 <Read
                   uniqueId={id}

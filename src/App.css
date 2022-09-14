@@ -1,3 +1,8 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
 h1{ 
   text-align: center;
   color: rgb(0, 132, 255) !important;
@@ -21,24 +26,23 @@ h1{
 .expensebtn:hover{  
   background-color: rgb(0, 132, 255) !important;
 }
-table{
+table {
+  width: 80%;
   margin: 0 auto;
 }
 tr,th,td{
   border: 1px solid rgba(153, 151, 151, 0.938);
-  padding: 1em;
   text-align: center;
+  padding: 10px;
 }
+
 th{
   background-color: rgba(143, 142, 142, 0.541);
-  font-size: 16px;
 }
+
 th:hover{
   background-color: rgba(0, 0, 0, 0.527);
   color: white;
-}
-td{
-  font-size: 16px;
 }
 button {
   padding: 5px; 
@@ -64,9 +68,9 @@ button {
   background-color:rgb(9, 136, 255) ;
 }
 .editbox{
-  width: 80%;
-  border-radius: 5px;
+  width: 100px;
+  border-radius: 2px;
   border: 0.5px solid grey;
-  padding-left: 5px;
   outline: none;
+  padding-left: 5px;
 }
