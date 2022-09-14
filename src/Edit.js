@@ -1,4 +1,3 @@
-import { Layout } from "antd";
 import React from "react";
 
 const Edit = ({ handleCancel, editForm, handleChange, handleEditSubmit, uniqueId,}) => {
