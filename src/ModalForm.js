@@ -31,7 +31,7 @@ const ModalForm = () => {
 
   return (
     <>
-      <div>
+      <div className="container">
         <div className="btn_center">
           <Button type="primary" onClick={showModal} className="expensebtn">
             Add Expense
