@@ -2,8 +2,14 @@ import { Modal, Input, Button, Form, InputNumber } from "antd";
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import Table from "./Table";
+import { useDispatch, useSelector } from "react-redux";
+import { amount, expensename, category, dateoftransaction, description } from "./expense/ExpenseSlicer";
 
 const ModalForm = () => {
+
+  const user = useSelector((state) => state.expenses.value);  
+  const dispatch = useDispatch();
+
   const [form] = Form.useForm();
   const [userData, setuserData] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -38,80 +44,44 @@ const ModalForm = () => {
           </Button>
         </div>
 
-        <div>
-          <Modal
-            title="Add Expense"
-            open={isModalVisible}
-            footer={null}
-            onCancel={handleCancel}
-          >
-            <Form
-              {...layout}
-              name="nest-messages"
-              onFinish={onFinish}
-              form={form}
-            >
-              <Form.Item
-                name={["category"]}
-                label="Category"
-                rules={[
-                  { required: true, message: "Enter a Category", min: 3 },
-                ]}
-                hasFeedback
-              >
-                <Input />
-              </Form.Item>
+        <div> <Modal title="Add Expense" open={isModalVisible} footer={null} onCancel={handleCancel} >
+          <Form {...layout} name="nest-messages" onFinish={onFinish} form={form}>
+            <Form.Item name={["category"]} label="Category" rules={[{ required: true, message: "Enter a Category", min: 3 },]} hasFeedback>
+              <Input />
+            </Form.Item>
 
-              <Form.Item
-                name={["expensename"]}
-                label="Expense Name"
-                rules={[
-                  { required: true, message: "Enter a Expensename", min: 3 },
-                ]}
-                hasFeedback
-              >
-                <Input />
-              </Form.Item>
+            <Form.Item name={["expensename"]} label="Expense Name" rules={[{ required: true, message: "Enter a Expensename", min: 3 },]} hasFeedback>
+              <Input />
+            </Form.Item>
 
-              <Form.Item
-                name={["amount"]}
-                label="Amount Spend"
-                rules={[{ required: true, message: "Enter Amount" }]}
-              >
-                <InputNumber />
-              </Form.Item>
+            <Form.Item name={["amount"]} label="Amount Spend" rules={[{ required: true, message: "Enter Amount" }]}>
+              <InputNumber />
+            </Form.Item>
 
-              <Form.Item
-                name={["dateoftransaction"]}
-                label="Date of Transaction"
-                rules={[{ required: true, message: "Pick the Date" }]}
-                hasFeedback
-              >
-                <input type={"date"} />
-              </Form.Item>
+            <Form.Item name={["dateoftransaction"]} label="Date of Transaction" rules={[{ required: true, message: "Pick the Date" }]} hasFeedback>
+              <input type={"date"} />
+            </Form.Item>
 
-              <Form.Item
-                name={["description"]}
-                label="Description"
-                rules={[
-                  { required: true, message: "Enter a Description", min: 5 },
-                ]}
-                hasFeedback
-              >
-                <Input.TextArea />
-              </Form.Item>
+            <Form.Item name={["description"]} label="Description" rules={[{ required: true, message: "Enter a Description", min: 5 },]} hasFeedback>
+              <Input.TextArea />
+            </Form.Item>
 
-              <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </Form.Item>
-            </Form>
-          </Modal>
+            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
         </div>
       </div>
       <div className="tableContainer">
-      <Table tracker={userData} open={showModal} handleDelete={handleDelete} setuserData={setuserData}/>
+        <Table
+          tracker={userData}
+          open={showModal}
+          handleDelete={handleDelete}
+          setuserData={setuserData}
+        />
       </div>
     </>
   );
