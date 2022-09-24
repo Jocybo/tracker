@@ -1,28 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const expenseTracker = createSlice({
-  
-  name: "expenses",
+
+  name: "expense",
   initialState: [],
   reducers: {
-    category: (state) => {
-      return state.category ;
+    addExpense: (state, action) => {
+      state.push(action.payload);
     },
-    expensename: (state) => {
-      return state.expensename;
-    },
-    amount: (state) => {
-      return state.amount;
-    },
-    dateoftransaction: (state) => {
-      return state.dateoftransaction;
-    },
-    description: (state) => {
-      return state.description;
-    },
+    deleteExpense: (state,action) => {
+      state = state.filter((e,index)=>index !== action.payload.id)
+    }
   },
 });
 
-export const {category,expensename,amount,dateoftransaction,description } = expenseTracker.actions;
+export const { addExpense,deleteExpense } = expenseTracker.actions;
 
 export default expenseTracker;

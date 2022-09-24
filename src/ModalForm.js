@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import "antd/dist/antd.css";
 import Table from "./Table";
 import { useDispatch, useSelector } from "react-redux";
-import { amount, expensename, category, dateoftransaction, description } from "./expense/ExpenseSlicer";
+import { addExpense,deleteExpense } from "./expense/ExpenseSlicer";
 
 const ModalForm = () => {
 
-  const user = useSelector((state) => state.expenses.value);  
+  const expenseList = useSelector((state) => state.expense);
+
   const dispatch = useDispatch();
 
   const [form] = Form.useForm();
@@ -17,7 +18,8 @@ const ModalForm = () => {
   const layout = { labelCol: { span: 8 }, wrapperCol: { span: 16 } };
 
   const onFinish = (values) => {
-    setuserData([...userData, values]);
+    dispatch(addExpense(values))
+    // setuserData([...userData, values]);
     setIsModalVisible(false);
     form.resetFields();
   };
@@ -31,12 +33,15 @@ const ModalForm = () => {
   };
 
   const handleDelete = (id) => {
-    let removeData = userData.filter((v, index) => index !== id);
-    setuserData(removeData);
+    dispatch(deleteExpense(id));
+    console.log(deleteExpense);
+    // let removeData = userData.filter((v, index) => index !== id);
+    // setuserData(removeData);
   };
 
   return (
     <>
+
       <div className="container">
         <div className="btn_center">
           <Button type="primary" onClick={showModal} className="expensebtn">
@@ -76,12 +81,7 @@ const ModalForm = () => {
         </div>
       </div>
       <div className="tableContainer">
-        <Table
-          tracker={userData}
-          open={showModal}
-          handleDelete={handleDelete}
-          setuserData={setuserData}
-        />
+        <Table tracker={expenseList} open={showModal} handleDelete={handleDelete} setuserData={setuserData} />
       </div>
     </>
   );
