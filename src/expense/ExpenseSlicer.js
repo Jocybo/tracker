@@ -12,7 +12,17 @@ const expenseTracker = createSlice({
       return state = state.filter((e, index) => index !== action.payload)
     },
     editExpense: (state, action) => {
-     return state = state.findIndex((e,index)=> index === action.payload)
+      state = state.findIndex((e, index) => {
+        if (index === action.payload) {
+          return state = {
+            category: action.payload.category,
+            expensename: action.payload.expensename,
+            amount: action.payload.amount,
+            dateoftransaction: action.payload.dateoftransaction,
+            description: action.payload.description,
+          }
+        }
+      })
     }
   },
 });
