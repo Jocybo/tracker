@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Edit from "./Edit";
 import Read from "./Read";
-
+import { deleteExpense, editExpense } from "./expense/ExpenseSlicer";
+import { useDispatch } from "react-redux";
 const Table = ({ tracker, handleDelete, setuserData }) => {
+
+  const dispatch = useDispatch()
 
   const [edit, setEdit] = useState(null);
   const [editForm, seteditForm] = useState({
@@ -43,6 +46,8 @@ const Table = ({ tracker, handleDelete, setuserData }) => {
   };
 
   const handleEditSubmit = (id) => {
+    
+    dispatch(deleteExpense(id));
 
     const editedValues = {
       category: editForm.category,

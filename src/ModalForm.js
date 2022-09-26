@@ -18,7 +18,7 @@ const ModalForm = () => {
 
   const onFinish = (values) => {
     dispatch(addExpense(values))
-    console.log(expenseList);
+    // console.log(expenseList);
     // setuserData([...userData, values]);
     setIsModalVisible(false);
     form.resetFields();
