@@ -8,7 +8,6 @@ import { addExpense,deleteExpense } from "./expense/ExpenseSlicer";
 const ModalForm = () => {
 
   const expenseList = useSelector((state) => state.expense);
-
   const dispatch = useDispatch();
 
   const [form] = Form.useForm();
@@ -19,6 +18,7 @@ const ModalForm = () => {
 
   const onFinish = (values) => {
     dispatch(addExpense(values))
+    console.log(expenseList);
     // setuserData([...userData, values]);
     setIsModalVisible(false);
     form.resetFields();
@@ -33,10 +33,9 @@ const ModalForm = () => {
   };
 
   const handleDelete = (id) => {
-    dispatch(deleteExpense(id));
-    console.log(deleteExpense);
-    // let removeData = userData.filter((v, index) => index !== id);
-    // setuserData(removeData);
+    dispatch(deleteExpense(id))
+    /* let removeData = userData.filter((v, index) => index !== id);
+    setuserData(removeData); */
   };
 
   return (

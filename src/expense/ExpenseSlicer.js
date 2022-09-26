@@ -8,12 +8,12 @@ const expenseTracker = createSlice({
     addExpense: (state, action) => {
       state.push(action.payload);
     },
-    deleteExpense: (state,action) => {
-      state = state.filter((e,index)=>index !== action.payload.id)
-    }
+    deleteExpense: (state, action) => {
+      return state = state.filter((v,index) => index !== action.payload)
+    },
   },
 });
 
-export const { addExpense,deleteExpense } = expenseTracker.actions;
+export const { addExpense, deleteExpense } = expenseTracker.actions;
 
 export default expenseTracker;

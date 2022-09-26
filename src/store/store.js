@@ -3,6 +3,6 @@ import expenseTracker from '../expense/ExpenseSlicer';
 
 export default configureStore ({
     reducer: {
-        expense : expenseTracker.reducer,
+        expense : expenseTracker.reducer
     }
 })
